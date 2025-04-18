@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer</title>
+    import React, { useState, useMemo, useCallback } from 'react';
+
+    const Timer = () => {
+        const [seconds, setSeconds] = useState(0);
+        const [running, setRunning] = useState(false);
+        const [timer, setTimer] = useState(null);
+    
+        // Memoize the formatted time (to avoid reformatting on every render)
+        const formattedTime = useMemo(() => {
+            const minutes = Math.floor(seconds / 60);
+            const displaySeconds = seconds % 60;
+            return `${padZero(minutes)}:${padZero(displaySeconds)}`;
+        }, [seconds]);
+    
+        // Memoize the start function (to prevent re-creating on each render)
+        const startTimer = useCallback(() => {
+            if (!running) {
+                setRunning(true);
+                setTimer(setInterval(() => {
+                    setSeconds(prev => prev + 1);
+                }, 1000));
+            }
+        }, [running]);
+    
+        // Memoize the stop function
+        const stopTimer = useCallback(() => {
+            clearInterval(timer);
+            setRunning(false);
+        }, [timer]);
+    
+        // Memoize the reset function
+        const resetTimer = useCallback(() => {
+            clearInterval(timer);
+            setRunning(false);
+            setSeconds(0);
+        }, [timer]);
+    
+        // Helper function to add leading zeros
+        const padZero = (number) => {
+            return number < 10 ? "0" + number : number;
+        };
+    
+        return (
+            <div>
+                <div id="timerDisplay">{formattedTime}</div>
+                <button onClick={startTimer} disabled={running}>Start</button>
+                <button onClick={stopTimer} disabled={!running}>Stop</button>
+                <button onClick={resetTimer}>Reset</button>
+            </div>
+        );
+    };
+    
+    export default Timer;
+    

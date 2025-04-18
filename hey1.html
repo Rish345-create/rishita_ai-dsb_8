@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>💸 Expense Splitter</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+
+  <style>
+    * {
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: #f9fafb;
+      color: #333;
+      padding: 30px;
+    }
+
+    h1 {
+      font-size: 2rem;
+      color: #4f46e5;
+    }
+
+    input {
+      padding: 10px;
+      margin: 10px 5px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background: #4f46e5;
+      color: white;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #4338ca;
+    }
+
+    table {
+      margin-top: 20px;
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #e0e7ff;
+    }
+
+    td img {
+      width: 30px;
+      border-radius: 50%;
+      margin-right: 6px;
+      vertical-align: middle;
+    }
+
+    .status-get {
+      color: green;
+      font-weight: bold;
+    }
+
+    .status-owe {
+      color: red;
+      font-weight: bold;
+    }
+
+    .status-neutral {
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <h1>💸 Expense Splitter App</h1>
+
+  <p>👥 Add Person and Their Paid Amount</p>
+  <input type="text" id="name" placeholder="🧑 Name" />
+  <input type="number" id="paid" placeholder="💰 Amount Paid" />
+  <button onclick="addPerson()">➕ Add Person</button>
+
+  <h2>📋 Group Summary</h2>
+  <p>Total People: <span id="totalPeople">0</span></p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>👤 Name</th>
+        <th>💸 Amount Paid</th>
+      </tr>
+    </thead>
+    <tbody id="peopleTableBody"></tbody>
+  </table>
+
+  <button onclick="calculateSplit()">🧮 Calculate Split</button>
+
+  <h2>💰 Final Balances</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>🙋 Person</th>
+        <th>Balance (₹)</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody id="balancesTableBody"></tbody>
+  </table>
+
+  <script src="fcode.js"></script>
+</body>
+</html>
